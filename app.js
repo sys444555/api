@@ -25,7 +25,7 @@ App({
   login: function() {
     var that = this;
     var token = that.globalData.token;
-
+    console.log("token: " + token)
     if (token) {
       wx.request({
         url: that.globalData.urls + "/user/check-token",

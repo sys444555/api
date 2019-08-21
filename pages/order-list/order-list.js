@@ -63,7 +63,7 @@ Page({
     var orderId = e.currentTarget.dataset.id;
     var money = e.currentTarget.dataset.money;
     wx.request({
-      url: app.siteInfo.url + app.siteInfo.subDomain + '/user/amount',
+      url: app.siteInfo.url + app.siteInfo.subDomain + '/api/user/amount',
       data: {
         token: app.globalData.token
       },
@@ -125,7 +125,7 @@ Page({
     var that = this;
     wx.request({
       url: app.siteInfo.url + app.siteInfo.subDomain + '/api/order/statistics',
-      data: { token: app.globalData.token },
+      data: { openId: app.globalData.openid},
       success: (res) => {
         wx.hideLoading();
         if (res.data.code == 0) {
@@ -204,12 +204,12 @@ Page({
     wx.showLoading();
     var that = this;
     var postData = {
-      token: app.globalData.token
+      openId: app.globalData.openid
     };
     postData.status = that.data.currentType;
     this.getOrderStatistics();
     wx.request({
-      url: app.siteInfo.url + app.siteInfo.subDomain + '/order/list',
+      url: app.siteInfo.url + app.siteInfo.subDomain + '/api/order/list',
       data: postData,
       success: (res) => {
 				console.log(res)

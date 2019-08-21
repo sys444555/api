@@ -13,7 +13,7 @@
   <view class="order-list" hidden="{{orderList ? false : true}}">
     <view class="a-order" wx:for-items="{{orderList}}" wx:key="{{index}}">
       <view class="order-date" bindtap="orderDetail" data-id="{{item.id}}">
-        <view class="date-box">下单时间：{{item.dateAdd}}</view>
+        <view class="date-box">下单时间：{{item.createTime}}</view>
         <view class="status {{(item.status==-1 || item.status==4) ? '':'red'}}">{{item.statusStr}}</view>
       </view>
       <view class="goods-info" bindtap="orderDetail" data-id="{{item.id}}">
@@ -24,16 +24,16 @@
       </view>
       <view bindtap="orderDetail" data-id="{{item.id}}">
         <scroll-view class="goods-img-container" scroll-x="true">
-          <view class="img-box" wx:for-items="{{goodsMap[item.id]}}" wx:key="{{index}}">
+          <view class="img-box" >
             <image src="{{item.pic}}" class="goods-img"></image>
           </view>
         </scroll-view>
       </view>
       <view class="price-box">
-        <view class="total-price">合计：¥ {{item.amountReal}}</view>
+        <view class="total-price">合计：¥ {{item.actualPrice}}</view>
 				<view class="btn-box">
 					<view class="btn cancel-btn" hidden="{{item.status==0? false : true}}" bindtap="cancelOrderTap" data-id="{{item.id}}">取消订单</view>
-					<view class="btn topay-btn" hidden="{{item.status==0? false: true}}" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.amountReal}}">立即支付</view>
+					<view class="btn topay-btn" hidden="{{item.status==0? false: true}}" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.actualPrice}}">立即支付</view>
 					<view class="btn topay-btn" hidden="{{item.status==3? false: true}}" bindtap="orderDetail" data-id="{{item.id}}">去评价</view>
 					<form bindsubmit="toConfirmTap" report-submit="true" data-id="{{item.id}}">
 					  <view wx:if="{{item.status==2}}">

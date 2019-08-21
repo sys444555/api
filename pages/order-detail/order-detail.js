@@ -22,9 +22,9 @@ Page({
       wx.showLoading();
       setTimeout(function () {
         wx.request({
-          url: app.globalData.urls + '/order/detail',
+          url: app.globalData.urls + '/api/order/detail',
           data: {
-            token: app.globalData.token,
+            openId: app.globalData.openid,
             id: that.data.orderId
           },
           success: (res) => {

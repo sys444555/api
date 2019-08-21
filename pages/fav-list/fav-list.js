@@ -24,7 +24,7 @@ Page({
       })
     }
     wx.request({
-      url: app.globalData.urls + '/shop/goods/fav/list',
+      url: app.globalData.urls + '/api/shop/goods/fav/list',
       data: {
         openId: app.globalData.openid
       },
