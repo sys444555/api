@@ -38,16 +38,17 @@ Page({
     })
   },
   onLoad: function () {
+    debugger;
     var that = this;
     if (app.globalData.iphone == true) { that.setData({ iphone: 'iphone' }) }
     wx.request({
-      url: app.globalData.urls + '/config/get-value',
+      url: app.globalData.urls + '/api/list',
       data: {
         key: 'shopcart'
       },
       success: function (res) {
         if (res.data.code == 0) {
-          var kb = res.data.data.value;
+          var kb = res.data.data[0].value;
           var kbarr = kb.split(',');
           that.setData({
             sales: res.data.data
@@ -55,7 +56,7 @@ Page({
           var sales = [];
           for (var i = 0; i < kbarr.length; i++) {
             wx.request({
-              url: app.globalData.urls + '/shop/goods/detail',
+              url: app.globalData.urls + '/api/shop/goods/detail',
               data: {
                 id: kbarr[i]
               },
@@ -104,7 +105,6 @@ Page({
       url: app.globalData.urls + '/api/order/statistics',
       data: { openId: app.globalData.openid },
       success: function (res) {
-        debugger;
         if (res.data.code == 0) {
           if (parseInt(res.data.data[0].noplay) > 0) {
             wx.setTabBarBadge({
@@ -128,6 +128,8 @@ Page({
     that.data.goodsList.list = shopList;
     that.setGoodsList(that.getSaveHide(), that.totalPrice(), that.allSelect(), that.noSelect(), shopList);
   },
+
+  
   toIndexPage: function () {
     wx.switchTab({
       url: "/pages/index/index"
@@ -334,6 +336,7 @@ Page({
 		app.getShopCartNum()
   },
   toPayOrder: function () {
+    debugger;
     wx.showLoading();
     var that = this;
     if (this.data.goodsList.noSelect) {
@@ -408,14 +411,15 @@ Page({
         })
       } else {
         wx.request({
-          url: app.globalData.urls + '/shop/goods/price',
+          url: app.globalData.urls + '/api/shop/goods/detail',
           data: {
-            goodsId: carShopBean.goodsId,
-            propertyChildIds: carShopBean.propertyChildIds
+            id: carShopBean.goodsId,
+            //propertyChildIds: carShopBean.propertyChildIds
           },
           success: function (res) {
             doneNumber++;
-            if (res.data.data.stores < carShopBean.number) {
+            if (res.data.data.basicInfo.stores < carShopBean.number) {
+              debugger;
               wx.showModal({
                 title: '提示',
                 content: carShopBean.name + ' 库存不足，请重新购买',
@@ -425,7 +429,7 @@ Page({
               wx.hideLoading();
               return;
             }
-            if (res.data.data.price != carShopBean.price) {
+            if (res.data.data.basicInfo.minPrice != carShopBean.price) {
               wx.showModal({
                 title: '提示',
                 content: carShopBean.name + ' 价格有调整，请重新购买',

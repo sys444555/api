@@ -16,7 +16,7 @@ Page({
     var that = this;
     if (app.globalData.iphone == true) { that.setData({ iphone: 'iphone' }) }
     wx.request({
-      url: app.globalData.urls + '/api/shop/goods/listById',
+      url: app.globalData.urls + '/api/shop/goods/listByCategoryId',
       data: {
         categoryId: e.id,
         pageSize: 100
@@ -28,15 +28,14 @@ Page({
           loadingMoreHidden: true
         });
         var goods = [];
-        debugger;
-        if (res.data.code != 0 || res.data.data.list.length == 0) {
+        if (res.data.code != 0 || res.data.data.length == 0) {
           that.setData({
             loadingMoreHidden: false,
           });
           return;
         }
-        for (var i = 0; i < res.data.data.list.length; i++) {
-          goods.push(res.data.data.list[i]);
+        for (var i = 0; i < res.data.data.length; i++) {
+          goods.push(res.data.data[i]);
         }
         that.setData({
           goods: goods,

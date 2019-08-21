@@ -16,7 +16,11 @@
     "pages/template-cart/template-cart",
     "pages/topic/topic",
     "pages/topic-list/topic-list",
+<<<<<<< HEAD
      
+=======
+    
+>>>>>>> e17b4c3c8ab1f2a60ca83700f6d707f8c28796ff
     "pages/score/score",
     "pages/withdraw/withdraw",
     "pages/fav-list/fav-list",

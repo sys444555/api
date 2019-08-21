@@ -6,7 +6,7 @@
 		 circular="circular">
 			<block wx:for="{{banners}}" wx:key="id">
 				<swiper-item>
-					<image bindtap="tapBanner" data-id="{{item.businessId}}" src="{{item.picUrl}}_m" class="slide-image" />
+					<image bindtap="tapBanner" data-id="{{item.businessId}}" src="{{item.picUrl}}" class="slide-image" />
 				</swiper-item>
 			</block>
 		</swiper>

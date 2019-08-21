@@ -44,7 +44,7 @@
       </block>
     </view>
   </view>
-  <view class="ptuan-info-box" wx:if="{{goodsDetail.basicInfo.pingtuan == true}}">
+  <!-- <view class="ptuan-info-box" wx:if="{{goodsDetail.basicInfo.pingtuan == true}}">
     <view class="pinfo-title">拼团流程</view>
     <view class="pinfo-list-box">
       <view class="pinfo-list">
@@ -64,8 +64,8 @@
         <text>人数不够自动退款</text>
       </view>
     </view>
-  </view>
-  <view class="ptuan-user-box" wx:if="{{goodsDetail.basicInfo.pingtuan == true && pingList}}">
+  </view> -->
+  <!-- <view class="ptuan-user-box" wx:if="{{goodsDetail.basicInfo.pingtuan == true && pingList}}">
     <view class="ptuan-user-title">参加以下网友的团，组团成功立即发货</view>
     <view class="ptuan-user-list" wx:for="{{pingList}}" wx:key="{{index}}" bindtap="addPingTuan" data-id="{{item.id}}" data-uid="{{item.uid}}">
       <image src="{{item.apiExtUser.avatarUrl}}" />
@@ -77,7 +77,7 @@
       </view>
       <view class="ptuan-user-btn">去参团></view>
     </view>
-  </view>
+  </view> -->
   <view wx:if="{{hasMoreSelect}}" class="row-arrow" bindtap="bindGuiGeTap">
     {{selectSize}}
     <image src="../../images/arrow-right.png"></image>
@@ -127,12 +127,12 @@
         <image wx:if="{{favicon == 0}}" src="../../images/goods_collect.png"></image>
         <image wx:if="{{favicon == 1}}" src="../../images/goods_collect_checked.png"></image>
       </view>
-      <block wx:if="{{ptuanCt}}">
+      <!-- <block wx:if="{{ptuanCt}}">
         <view class="box-title buy-now shares" bindtap="goPingtuanTap">
           我已发起过拼团 | 查看拼团详情
         </view>
-      </block>
-      <block wx:if="{{!ptuanCt}}">
+      </block> -->
+      <!-- <block wx:if="{{!ptuanCt}}">
         <view class="box-title ono" bindtap="tobuy">
           <view class="boxshop-yuan">Ұ {{selectSizePrice}}</view>
           <view class="box-shop-cart">原价购买</view>
@@ -141,7 +141,7 @@
           <view class="boxshop-yuan">Ұ {{goodsDetail.basicInfo.pingtuanPrice}}</view>
           <view class="box-shop-cart">一键开团</view>
         </view>
-      </block>
+      </block> -->
     </view>
   </block>
   <block wx:if="{{goodsDetail.basicInfo.pingtuan == 'false'}}">
@@ -158,9 +158,9 @@
         <image wx:if="{{favicon == 0}}" src="../../images/goods_collect.png"></image>
         <image wx:if="{{favicon == 1}}" src="../../images/goods_collect_checked.png"></image>
       </view>
-      <view class="box-title">
+      <!-- <view class="box-title">
         <view class="box-shop-cart npx" bindtap="tobuy">立即购买</view>
-      </view>
+      </view> -->
       <view class="box-title buy-now">
         <view class="box-now-buy npx" bindtap="toAddShopCar">加入购物车</view>
       </view>
@@ -202,8 +202,8 @@
         </view>
       </view>
       <view class="popup-join-btn" wx:if="{{shopType =='addShopCar'}}" bindtap="addShopCar">加入购物车</view>
-      <view class="popup-join-btn" wx:if="{{shopType =='tobuy'}}" bindtap="buyNow"> 立即购买</view>
-      <view class="popup-join-btn" wx:if="{{shopType =='pingtuan'}}" bindtap="buyPingtuan"> 立即开团</view>
+      <!-- <view class="popup-join-btn" wx:if="{{shopType =='tobuy'}}" bindtap="buyNow"> 立即购买</view> -->
+      <!-- <view class="popup-join-btn" wx:if="{{shopType =='pingtuan'}}" bindtap="buyPingtuan"> 立即开团</view> -->
     </view>
   </view>
 </view>

@@ -17,7 +17,6 @@ Page({
     wx.navigateBack({})
   },
   bindSave: function(e) {
-    debugger;
     var that = this;
     var linkMan = e.detail.value.linkMan;
     var address = e.detail.value.address;
@@ -268,8 +267,9 @@ Page({
               "token": app.globalData.token,
               "Content-Type": "application/x-www-form-urlencoded"
             },
-            url: app.siteInfo.url + app.siteInfo.subDomain + '/api/user/shipping-address/delete',
+            url: app.siteInfo.url + app.siteInfo.subDomain + '/user/shipping-address/delete',
             data: {
+              openId: app.globalData.openid,
               id: id
             },
             success: (res) => {

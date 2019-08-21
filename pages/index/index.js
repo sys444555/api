@@ -185,7 +185,7 @@ Page({
     if (e.detail.userInfo) { //点击允许先
       var that = this;
       wx.request({
-        url: 'http://localhost/wx/api/user/decodeUserInfo',
+        url: app.globalData.urls + '/api/user/decodeUserInfo',
         data: {
           openId: getApp().globalData.openId, //用户的唯一标识
           nickName: e.detail.userInfo.nickName, //微信昵称
