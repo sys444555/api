@@ -1,0 +1,57 @@
+page{
+  background: #f9f9f9;
+}
+.head {
+    height: 800rpx;
+    width: 100%;
+}
+
+.image image{
+  height: 800rpx;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+}
+
+.introduce{
+  position: absolute;
+  z-index: 2;
+  background-color: white;
+  margin: 720rpx 7%;
+  height: 120rpx;
+  width:80%;
+  padding: 20rpx;
+  font-size: 28rpx;
+}
+.title{
+  text-align: center;
+  margin-top: 130rpx;
+  margin-bottom: 30rpx;
+  font-size:  40rpx;
+  font-weight: 700rpx;
+}
+
+.goods-list image {
+  width: 340rpx;
+  height: 340rpx;
+  border-radius: 6rpx;
+}
+.goods-list {
+  display: inline-block;
+  width: 45%;
+  margin-left: 26rpx;
+  height: 480rpx;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+}
+.goods-list-title {
+  font-size: 30rpx;
+  color: #333;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.goods-list-money {
+  font-size: 30rpx;
+  color: #ab2b2b;
+}
