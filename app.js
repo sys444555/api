@@ -23,16 +23,11 @@ App({
   },
   siteInfo: require("config.js"),
   login: function() {
-<<<<<<< HEAD
-    var that = this;
-    var token = that.globalData.token;
-    console.log("token: " + token)
-=======
+
 
     var that = this;
     var token = that.globalData.token;
     
->>>>>>> e17b4c3c8ab1f2a60ca83700f6d707f8c28796ff
     if (token) {
       wx.request({
         url: that.globalData.urls + "/user/check-token",
@@ -52,11 +47,9 @@ App({
 
       success: function (res) {
         wx.request({
-<<<<<<< HEAD
-          url: "http://localhost/wx/user/getUserInfo",
-=======
+
           url: that.globalData.urls + "/user/getUserInfo",
->>>>>>> e17b4c3c8ab1f2a60ca83700f6d707f8c28796ff
+
           data: {
             appid: "wxfd945e2b4a767dc3",
             secret: "0d921f83d3a88312703d8771709fb7e1",
@@ -86,11 +79,7 @@ App({
             that.globalData.openid = res.data.data.openid;
             that.globalData.token = res.data.data.access_token;
             that.globalData.uid = res.data.data.uid;
-<<<<<<< HEAD
-
-=======
             that.globalData.usinfo = -1
->>>>>>> e17b4c3c8ab1f2a60ca83700f6d707f8c28796ff
           }
         });
       }

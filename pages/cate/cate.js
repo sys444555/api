@@ -185,7 +185,7 @@ Page({
       url: app.globalData.urls + '/api/order/statistics',
       data: { token: app.globalData.token },
       success: function (res) {
-        if (res.data.code == 0) {
+        if (res.data.code == 0 && res.data.data.length > 0) {
           if (res.data.data[0].noplay > 0) {
             wx.setTabBarBadge({
               index: 3,
