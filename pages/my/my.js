@@ -18,7 +18,6 @@ Page({
     var that = this;
     that.getUserApiInfo();
     that.getUserAmount();
-    that.checkScoreSign();
     that.getInfo();
     wx.request({
       url: app.globalData.urls + '/api/notice/list',
@@ -37,7 +36,6 @@ Page({
   onShow() {
     this.getUserApiInfo();
     this.getUserAmount();
-    this.checkScoreSign();
     this.getInfo();
     this.getUserInfo();
     //更新订单状态
@@ -142,25 +140,6 @@ Page({
     })
   },
 
-
-  checkScoreSign: function () {
-    var that = this;
-    wx.request({
-      url: app.globalData.urls + '/api/score/today-signed',
-      data: {
-        openId: app.globalData.openid
-      },
-      success: function (res) {
-        if (res.data.code == 0) {
-          that.setData({
-            score_sign_continuous: res.data.data.continuous
-          });
-        }
-      }
-    })
-  },
-
-
   getUserInfo: function(cb) {
     var that = this
     wx.login({
@@ -172,27 +151,6 @@ Page({
             });
           }
         })
-      }
-    })
-  },
-  scoresign: function() {
-    var that = this;
-    wx.request({
-      url: app.globalData.urls + '/score/sign',
-      data: {
-        openId: app.globalData.openid
-      },
-      success: function(res) {
-        if (res.data.code == 0) {
-          that.getUserAmount();
-          that.checkScoreSign();
-        } else {
-          wx.showModal({
-            title: '错误',
-            content: res.data.msg,
-            showCancel: false
-          })
-        }
       }
     })
   },
@@ -219,9 +177,5 @@ Page({
       }
     })
   },
-  score: function() {
-    wx.navigateTo({
-      url: "/pages/score/score"
-    })
-  },
+ 
 })

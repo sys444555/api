@@ -15,21 +15,21 @@ Page({
 		loadingMoreHidden: true,
 		showSearch: true,
     sales: [{
-      "id": 1,
-      "linkUrl": "/pages/coupons/coupons",
-      "title": "优惠卷",
-      "picUrl": "/images/icon/liquan.png"
-    },{
         "id": 2,
         "linkUrl": "/pages/fav-list/fav-list",
         "title": "我的收藏",
         "picUrl": "/images/icon/qiandao.png"
     },{
-        "id": 3,
+        "id": 1,
         "linkUrl": "",
         "title": "会员充值",
         "picUrl": "/images/icon/zhuanlan.png"
-    }],
+      }, {
+        "id": 3,
+        "linkUrl": "/pages/order-list/order-list",
+        "title": "我的订单",
+        "picUrl": "/images/icon/kanjia.png"
+      }],
     // hot:[{
     //   "linkUrl": "../Advertisement/Advertisement",
     //   "picUrl":"/images/mid1.png",
