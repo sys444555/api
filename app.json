@@ -1,38 +1,24 @@
 {
   "pages": [
-   
     "pages/index/index",
+    "pages/Advertisement/Advertisement",
+    "pages/search/search",
+    "pages/withdraw/withdraw",   
     "pages/my/my",
-    "pages/my-coupons/my-coupons",
-    "pages/coupons/coupons",
     "pages/cate/cate",
     "pages/cart/cart",
-    
     "pages/logs/logs",
     "pages/address/address",
-    
-    "pages/Advertisement/Advertisement",
     "pages/goods-detail/goods-detail",
     "pages/template-cart/template-cart",
-    "pages/topic/topic",
-    "pages/topic-list/topic-list",
-    "pages/score/score",
-    "pages/withdraw/withdraw",
     "pages/fav-list/fav-list",
-    
     "pages/address-add/address-add",
     "pages/order-list/order-list",
     "pages/cate-list/cate-list",
     "pages/order-detail/order-detail",
-    "pages/notice/notice",
-    
     "pages/logistics/logistics",
     "pages/success/success",
-    "pages/pay-order/pay-order",
-    "pages/freshman/freshman",
-    "pages/search/search"
-
-    
+    "pages/pay-order/pay-order"
   ],
   "window": {
     "navigationStyle": "custom",
