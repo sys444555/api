@@ -38,7 +38,7 @@ page{
 
 .swiper-container .swiper_box {
   width: 750rpx;
-  height: 750rpx;
+  height: 1000rpx;
 	border-bottom-right-radius: 20rpx;
 	border-bottom-left-radius: 20rpx;
 	overflow: hidden;
@@ -46,7 +46,7 @@ page{
 
 .swiper-container .slide-image {
   width: 750rpx;
-  height: 750rpx;
+  height: 1000rpx;
 }
 
 .swiper-container .dots {
@@ -56,7 +56,7 @@ page{
   bottom: 0;
   display: flex;
   justify-content: center;
-  top: 680rpx;
+  top: 900rpx;
   height: 10rpx;
 }
 

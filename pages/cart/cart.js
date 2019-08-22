@@ -38,7 +38,7 @@ Page({
     })
   },
   onLoad: function () {
-    debugger;
+    
     var that = this;
     if (app.globalData.iphone == true) { that.setData({ iphone: 'iphone' }) }
     wx.request({

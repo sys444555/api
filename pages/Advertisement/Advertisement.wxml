@@ -1,25 +1,17 @@
 
 <navigation id='Navigation' show-icon="{{true}}" title="主题详情" show-title="{{true}}" class=""></navigation>
 <view class="head">
-<view class="image"><image src="/images/hot.jpg"></image></view>
-<view class="introduce">10年专注于女装设计的资深团队，莎斯莱思开设了女装研发工作室，直击纯正的英伦潮流元素，演绎潮流摩登。
+<view class="image"><image src="{{home.picUrl}}"></image></view>
+<view class="introduce">{{home.details}}</view>
 </view>
+<view class='title'>{{home.theme}}</view>
+<view>
+<navigator url="" class="goods-list" wx:for-items="{{shop}}" wx:key="{{index}}">
+	    <image src="{{item.pic}}"/>
+	    <view class="goods-list-title">{{item.name}}</view>
+	    <view class="goods-list-money">Ұ{{item.minPrice}}</view>
+</navigator>
 </view>
-<view class='title'>
-时尚潮流
+<view class="noShop" hidden='{{hidden}}'>
+  ———— 暂无更多商品 ————
 </view>
-<navigator url="" class="goods-list">
-	    <image src="/images/hotClothing.jpg"/>
-	    <view class="goods-list-title">雪纺连衣裙2019秋季新款韩版女装一件代发单排扣长袖荷叶边裙1118</view>
-	    <view class="goods-list-money">Ұ474.05</view>
-</navigator>
-<navigator url="" class="goods-list">
-	    <image src="/images/hotClothing.jpg"/>
-	    <view class="goods-list-title">雪纺连衣裙2019秋季新款韩版女装一件代发单排扣长袖荷叶边裙1118</view>
-	    <view class="goods-list-money">Ұ474.05</view>
-</navigator>
-<navigator url="" class="goods-list">
-	    <image src="/images/hotClothing.jpg"/>
-	    <view class="goods-list-title">雪纺连衣裙2019秋季新款韩版女装一件代发单排扣长袖荷叶边裙1118</view>
-	    <view class="goods-list-money">Ұ474.05</view>
-</navigator>

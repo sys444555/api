@@ -7,7 +7,7 @@ page{
 }
 
 .image image{
-  height: 800rpx;
+  height: 1000rpx;
   width: 100%;
   position: absolute;
   z-index: -1;
@@ -17,7 +17,7 @@ page{
   position: absolute;
   z-index: 2;
   background-color: white;
-  margin: 720rpx 7%;
+  margin: 920rpx 7%;
   height: 120rpx;
   width:80%;
   padding: 20rpx;
@@ -25,8 +25,8 @@ page{
 }
 .title{
   text-align: center;
-  margin-top: 130rpx;
-  margin-bottom: 30rpx;
+  margin-top: 330rpx;
+  margin-bottom: 40rpx;
   font-size:  40rpx;
   font-weight: 700rpx;
 }
@@ -54,4 +54,10 @@ page{
 .goods-list-money {
   font-size: 30rpx;
   color: #ab2b2b;
+}
+.noShop{
+  color: #DCDCDC;
+  text-align: center;
+  font-size: 30rpx;
+  margin-top: 150rpx;
 }
