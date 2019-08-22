@@ -30,19 +30,19 @@ Page({
         "title": "会员充值",
         "picUrl": "/images/icon/zhuanlan.png"
     }],
-    hot:[{
-      "linkUrl": "../Advertisement/Advertisement",
-      "picUrl":"/images/mid1.png",
-    }, {
-        "linkUrl": "../Advertisement/Advertisement",
-        "picUrl": "/images/mid2.png",
-      }, {
-        "linkUrl": "../Advertisement/Advertisement",
-        "picUrl": "/images/mid3.png",
-      }, {
-        "linkUrl": "../Advertisement/Advertisement",
-        "picUrl": "/images/mid4.png",
-      }]
+    // hot:[{
+    //   "linkUrl": "../Advertisement/Advertisement",
+    //   "picUrl":"/images/mid1.png",
+    // }, {
+    //     "linkUrl": "../Advertisement/Advertisement",
+    //     "picUrl": "/images/mid2.png",
+    //   }, {
+    //     "linkUrl": "../Advertisement/Advertisement",
+    //     "picUrl": "/images/mid3.png",
+    //   }, {
+    //     "linkUrl": "../Advertisement/Advertisement",
+    //     "picUrl": "/images/mid4.png",
+    //   }]
     
 	},
 	onShow(){
@@ -104,20 +104,21 @@ Page({
 		//     }
 		//   }
 		// })
-		//4个热销广告位
-		// wx.request({
-		//   url: app.globalData.urls + '/banner/list',
-		//   data: {
-		//     type: 'hot'
-		//   },
-		//   success: function (res) {
-		//     if (res.data.code == 0) {
-		//       that.setData({
-		//         hot: res.data.data
-		//       });
-		//     }
-		//   }
-		// })
+	//	4个热销广告位
+		wx.request({
+		  url: app.globalData.urls + '/api/banner/list',
+		  data: {
+		    type: 'hot'
+		  },
+		  success: function (res) {
+        
+		    if (res.data.code == 0) {
+		      that.setData({
+		        hot: res.data.data
+		      });
+		    }
+		  }
+		})
 		//获取推荐商品信息
 		wx.request({
 		  url: app.globalData.urls + '/api/list',
@@ -187,7 +188,7 @@ Page({
       wx.request({
         url: app.globalData.urls + '/api/user/decodeUserInfo',
         data: {
-          openId: getApp().globalData.openId, //用户的唯一标识
+          openId: getApp().globalData.openid, //用户的唯一标识
           nickName: e.detail.userInfo.nickName, //微信昵称
           avatarUrl: e.detail.userInfo.avatarUrl, //微信头像
           province: e.detail.userInfo.province, //用户注册的省

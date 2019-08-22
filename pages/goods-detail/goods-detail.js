@@ -650,9 +650,10 @@ Page({
         openId: app.globalData.openid
       },
       success: function(res) {
+       
         if (res.data.code == 0 && res.data.data.length) {
           for (var i = 0; i < res.data.data.length; i++) {
-            if (res.data.data[i].goodsId == parseInt(id)) {
+            if (res.data.data[i].id == parseInt(id)) {
               that.setData({
                 favicon: 1
               });
@@ -666,17 +667,22 @@ Page({
   fav: function() {
     var that = this;
     wx.request({
-      url: app.globalData.urls + '/shop/goods/fav/add',
+      url: app.globalData.urls + '/api/shop/goods/fav/add',
+      header: {
+        "token": app.globalData.token,
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
       data: {
         goodsId: this.data.goodsDetail.basicInfo.id,
-        token: app.globalData.token
+        openId: app.globalData.openid,
       },
+      method: "POST",
       success: function(res) {
         if (res.data.code == 0) {
           wx.showToast({
             title: '收藏成功',
             icon: 'success',
-            image: '../../images/active.png',
+            image: '../../images/addr-active.png',
             duration: 2000
           })
           that.setData({
@@ -689,17 +695,22 @@ Page({
   del: function() {
     var that = this;
     wx.request({
-      url: app.globalData.urls + '/shop/goods/fav/delete',
+      url: app.globalData.urls + '/api/shop/goods/fav/delete',
+      header: {
+        "token": app.globalData.token,
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: "POST",
       data: {
         goodsId: this.data.goodsDetail.basicInfo.id,
-        token: app.globalData.token
+        openId: app.globalData.openid,
       },
       success: function(res) {
         if (res.data.code == 0) {
           wx.showToast({
             title: '取消收藏',
             icon: 'success',
-            image: '../../images/error.png',
+            image: '../../images/del.png',
             duration: 2000
           })
           that.setData({

@@ -6,17 +6,18 @@ Page({
     favList: []
   },
 
-  toDetailsTap: function(e) {
+  toDetailsTap: function (e) {
+
     wx.navigateTo({
       url: "/pages/goods-detail/goods-detail?id=" + e.currentTarget.dataset.id
     })
   },
-  home: function() {
+  home: function () {
     wx.switchTab({
       url: "/pages/index/index"
     })
   },
-  onShow: function() {
+  onShow: function () {
     var that = this;
     if (app.globalData.iphone == true) {
       that.setData({
@@ -24,12 +25,12 @@ Page({
       })
     }
     wx.request({
-      url: app.globalData.urls + '/shop/goods/fav/list',
+      url: app.globalData.urls + '/api/shop/goods/fav/list',
       data: {
         openId: app.globalData.openid
       },
-      success: function(res) {
-        console.log(res)
+      success: function (res) {
+
         if (res.data.code == 0) {
           that.setData({
             favList: res.data.data,
