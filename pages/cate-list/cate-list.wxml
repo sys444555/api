@@ -4,9 +4,6 @@
     <view class="goods-box" wx:for-items="{{goods}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
       <view class="img-box">
         <image src="{{item.pic}}" class="image" mode="widthFix" lazy-load="true" />
-        <view class="goods-characteristic">
-          <text>{{item.characteristic}}</text>
-        </view>
       </view>
       <view class="goods-title">{{item.name}}</view>
       <view style='display:flex;'>
