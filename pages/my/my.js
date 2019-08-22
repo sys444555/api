@@ -45,7 +45,7 @@ Page({
     wx.request({
       url: app.globalData.urls + '/api/order/statistics',
       data: {
-        opneId: app.globalData.openid
+        openId: app.globalData.openid
       },
       success: function(res) {
         if (res.data.code == 0 && res.data.data.length > 0) {
