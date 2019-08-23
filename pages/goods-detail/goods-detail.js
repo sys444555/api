@@ -287,7 +287,7 @@ Page({
    * @param {Object} e
    */
   labelItemTap: function(e) {
-
+    debugger;
     var that = this;
     // 取消该分类下的子栏目所有的选中状态
     var childs = that.data.goodsDetail.properties[e.currentTarget.dataset.propertyindex].childsCurGoods;
@@ -308,7 +308,8 @@ Page({
           
           curSelectNum++;
           propertyChildIds = propertyChildIds + that.data.goodsDetail.properties[i].id + ":" + childs[j].id + ",";
-          propertyChildNames = propertyChildNames + that.data.goodsDetail.properties[i].name + ":" + childs[j].name + "  ";
+
+          propertyChildNames = propertyChildNames + that.data.goodsDetail.properties[i].value + ":" + childs[j].value + "  ";
         }
       }
     }
@@ -353,7 +354,6 @@ Page({
    * 加入购物车
    */
   addShopCar: function() {
-    
     if (this.data.goodsDetail.properties && !this.data.canSubmit) {
       if (!this.data.canSubmit) {
         wx.showModal({
