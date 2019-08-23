@@ -1,9 +1,11 @@
 {
   "pages": [
+    
+    
     "pages/index/index",
     "pages/Advertisement/Advertisement",
     "pages/search/search",
-    "pages/withdraw/withdraw",   
+    "pages/withdraw/withdraw",
     "pages/my/my",
     "pages/cate/cate",
     "pages/cart/cart",

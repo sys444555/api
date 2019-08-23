@@ -145,9 +145,7 @@ Page({
           }
           that.setData({
             hasMoreSelect: true,
-            selectSize: that.data.selectSize + selectSizeTemp,
             selectSizePrice: res.data.data.basicInfo.minPrice,
-
           });
         }
         that.data.goodsDetail = res.data.data;

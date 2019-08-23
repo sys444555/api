@@ -113,7 +113,7 @@ Page({
         openId: app.globalData.openid
       },
       success: function(res) {
-        if (res.data.code == 0) {
+        if (res.data.code == 0 && res.data.data.length == 1) {
           that.setData({
             balance: res.data.data.balance,
             freeze: res.data.data.freeze,
