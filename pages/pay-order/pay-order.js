@@ -11,7 +11,7 @@ Page({
     allGoodsAndYunPrice: 0,
     goodsJsonStr: "",
     orderType: "", //订单类型，购物车下单或立即支付下单，默认是购物车，
-
+    
     hasNoCoupons: true,
     coupons: [],
     youhuijine: 0, //优惠券金额
@@ -45,7 +45,7 @@ Page({
   },
 
   onLoad: function(e) {
-    debugger;
+  
     //console.log(e)
     var that = this;
     if (app.globalData.iphone == true) {
@@ -71,7 +71,7 @@ Page({
   },
 
   createOrder: function(e) {
-    debugger;
+ 
     wx.showLoading();
     var that = this;
     var loginToken = app.globalData.token // 用户登录 token
@@ -92,7 +92,7 @@ Page({
     */
     var postData = {
       //token: loginToken,
-      goodsJsonStr: that.data.goodsJsonStr,
+      goodsJsonStr: JSON.stringify(that.data.goodsJsonStr),
       remark: remark
     };
     if (that.data.isNeedLogistics > 0) {
@@ -111,7 +111,7 @@ Page({
         postData.kjid = that.data.goodsList[0].kjid
       }
 
-      postData.addressId = that.data.curAddressData.addressId;
+      postData.addressId = that.data.curAddressData.id;
 
       postData.expireMinutes = app.siteInfo.closeorder;
     }
@@ -230,7 +230,7 @@ Page({
     })
   },
   processYunfei: function() {
-    debugger;
+    
     var that = this;
     var goodsList = this.data.goodsList;
     var goodsJsonStr = "[";
