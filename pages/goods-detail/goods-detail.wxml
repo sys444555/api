@@ -44,40 +44,6 @@
       </block>
     </view>
   </view>
-  <!-- <view class="ptuan-info-box" wx:if="{{goodsDetail.basicInfo.pingtuan == true}}">
-    <view class="pinfo-title">拼团流程</view>
-    <view class="pinfo-list-box">
-      <view class="pinfo-list">
-        <image src="../../images/pingtuan/1.png" />
-        <text>支付开团或参团</text>
-      </view>
-      <view class="pinfo-list">
-        <image src="../../images/pingtuan/2.png" />
-        <text>邀请好友一起拼团</text>
-      </view>
-      <view class="pinfo-list">
-        <image src="../../images/pingtuan/3.png" />
-        <text>达到人数分别发货</text>
-      </view>
-      <view class="pinfo-list">
-        <image src="../../images/pingtuan/4.png" />
-        <text>人数不够自动退款</text>
-      </view>
-    </view>
-  </view> -->
-  <!-- <view class="ptuan-user-box" wx:if="{{goodsDetail.basicInfo.pingtuan == true && pingList}}">
-    <view class="ptuan-user-title">参加以下网友的团，组团成功立即发货</view>
-    <view class="ptuan-user-list" wx:for="{{pingList}}" wx:key="{{index}}" bindtap="addPingTuan" data-id="{{item.id}}" data-uid="{{item.uid}}">
-      <image src="{{item.apiExtUser.avatarUrl}}" />
-      <view class="ptuan-user-info-box">
-        <view class="ptuan-user-name">
-          <text>{{item.apiExtUser.nick}}</text>
-          <text>还差{{pingtuan.numberPersion - item.helpNumber}}人成团</text>
-        </view>
-      </view>
-      <view class="ptuan-user-btn">去参团></view>
-    </view>
-  </view> -->
   <view wx:if="{{hasMoreSelect}}" class="row-arrow" bindtap="bindGuiGeTap">
     {{selectSize}}
     <image src="../../images/arrow-right.png"></image>
@@ -182,11 +148,11 @@
       </view>
       <view class="size-label-box">
         <block wx:for="{{goodsDetail.properties}}" wx:for-item="property" wx:for-index="idx" wx:key="id">
-          <view class="label">{{property.name}}</view>
+          <view class="label">{{property.specification}}</view>
           <view class="label-item-box">
-            <view class="label-item {{item.active ? 'active' : '' }}" wx:for="{{property.childsCurGoods}}" wx:key="id" bindtap="labelItemTap" data-propertyindex="{{idx}}" data-propertyid="{{property.id}}" data-propertyname="{{property.name}}" data-propertychildindex="{{index}}"
-              data-propertychildid="{{item.id}}" data-propertychildname="{{item.name}}">
-              {{item.name}}
+            <view class="label-item {{item.active ? 'active' : '' }}" wx:for="{{property.childsCurGoods}}" wx:key="id" bindtap="labelItemTap" data-propertyindex="{{idx}}" data-propertyid="{{property.id}}" data-propertyname="{{property.specification}}" data-propertychildindex="{{index}}"
+              data-propertychildid="{{item.id}}" data-propertychildname="{{item.specification}}">
+              {{item.value}}
             </view>
           </view>
         </block>

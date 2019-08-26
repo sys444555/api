@@ -5,21 +5,29 @@ Page({
    * 页面的初始数据
    */
   data: {
-    balance: 0
+    balance: 0,
+    tabArr: {
+      curHdIndex: 0,
+      curBdIndex: 0
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
+  onLoad: function() {
     var that = this;
-    if (app.globalData.iphone == true) { that.setData({ iphone: 'iphone' }) }
+    if (app.globalData.iphone == true) {
+      that.setData({
+        iphone: 'iphone'
+      })
+    }
     wx.request({
       url: app.globalData.urls + '/user/amount',
       data: {
         token: app.globalData.token
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.code == 0) {
           that.setData({
             balance: res.data.data.balance,
@@ -34,70 +42,79 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  
+  onReady: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    var that = this;
-    wx.request({
-      url: app.globalData.urls + '/user/amount',
-      data: {
-        token: app.globalData.token
-      },
-      success: function (res) {
-        if (res.data.code == 0) {
-          that.setData({
-            balance: res.data.data.balance,
-            freeze: res.data.data.freeze,
-            score: res.data.data.score
-          });
-        }
-      }
-    })
+  onShow: function() {
+    // var that = this;
+    // wx.request({
+    //   url: app.globalData.urls + '/user/amount',
+    //   data: {
+    //     token: app.globalData.token
+    //   },
+    //   success: function(res) {
+    //     if (res.data.code == 0) {
+    //       that.setData({
+    //         balance: res.data.data.balance,
+    //         freeze: res.data.data.freeze,
+    //         score: res.data.data.score
+    //       });
+    //     }
+    //   }
+    // })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-  
+  onHide: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-  
+  onUnload: function() {
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-  
+  onPullDownRefresh: function() {
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-  
+  onReachBottom: function() {
+
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  
+  onShareAppMessage: function() {
+
   },
-  bindCancel: function () {
+  bindCancel: function() {
     wx.navigateBack({})
   },
-  bindSave: function (e) {
+  tabFun: function (e) {
+    var _datasetId = e.target.dataset.id;
+    var _obj = {};
+    _obj.curHdIndex = _datasetId;
+    _obj.curBdIndex = _datasetId;
+    this.setData({
+      tabArr: _obj
+    });
+  },
+  bindSave: function(e) {
     var that = this;
     var amount = e.detail.value.amount;
 
@@ -115,13 +132,13 @@ Page({
         token: app.globalData.token,
         money: amount
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.code == 0) {
           wx.showModal({
             title: '成功',
             content: '您的提现申请已提交，等待财务打款',
             showCancel: false,
-            success: function (res) {
+            success: function(res) {
               if (res.confirm) {
                 that.bindCancel();
               }

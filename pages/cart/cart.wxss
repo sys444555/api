@@ -54,24 +54,8 @@ page {
   overflow: hidden;
 }
 
-.goods-characteristic {
-  font-size: 22rpx;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  background-color: #f0ece1;
-  color: #a18d65;
-  height: 35px;
-  line-height: 35px;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-}
 
-.goods-characteristic text {
-  padding-left: 5px;
-}
+
 
 .goods-title {
   font-size: 28rpx;

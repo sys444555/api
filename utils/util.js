@@ -12,6 +12,14 @@ function formatNumber(n) {
 	n = n.toString()
 	return n[1] ? n : '0' + n
 }
-module.exports = {
-	formatTime: formatTime
+
+//生成订单号
+const orderId = oId => {
+  return Math.floor(Math.random() * 99999999999999999);
 }
+
+module.exports = {
+	formatTime: formatTime,
+  orderId: orderId
+}
+
