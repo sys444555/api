@@ -79,7 +79,18 @@ Page({
     var orderOn = util.orderId();
 
     var goodsJsonStr = that.data.goodsJsonStr;
-    var addressId = that.data.curAddressData.id;
+    if (that.data.curAddressData){
+      var addressId = that.data.curAddressData.id;
+    }else{
+      wx.showToast({
+        title:'请填写收货地址',
+        duration: 3000,
+        mask: true,
+        icon: 'none'
+      })
+      return;
+    }
+    
 
     var remark = "";
 
@@ -141,13 +152,11 @@ Page({
                   wx.removeStorageSync('shopCarInfo');
                   wx.removeStorageSync('buykjInfo');
                 }
-
-                wx.navigateBack({
-                  
-                })
+                wx.hideLoading();
+                wx.navigateBack({})
 
                 // console.log(postData)
-                //wx.hideLoading();
+               
 
 
               }

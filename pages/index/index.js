@@ -21,7 +21,7 @@ Page({
         "picUrl": "/images/icon/qiandao.png"
     },{
         "id": 1,
-        "linkUrl": "",
+        "linkUrl": "/pages/withdraw/withdraw",
         "title": "会员充值",
         "picUrl": "/images/icon/zhuanlan.png"
       }, {
@@ -212,6 +212,8 @@ Page({
                   wxlogin: true
                 })
                 wx.showTabBar();
+                wx.removeStorageSync('shopCarInfo');
+                wx.removeStorageSync('buykjInfo');
               }
             })
           }
