@@ -46,7 +46,7 @@ Page({
   },
 
   onLoad: function(e) {
-    debugger;
+    
     //console.log(e)
     var that = this;
     if (app.globalData.iphone == true) {
@@ -91,12 +91,14 @@ Page({
       goodsJsonStr: goodsJsonStr,
       remark: remark,
       orderOn: orderOn,
-      addressId: addressId
+      addressId: addressId,
+      payId: 0,
+      actualPrice: this.data.allGoodsPrice
     }
 
     console.log(goodsJsonStr)
 
-    debugger;
+    
 
     wx: wx.request({
       url: app.globalData.urls + '/api/wxPay',
@@ -318,7 +320,7 @@ Page({
     })
   },
   processYunfei: function() {
-    debugger;
+    
     var that = this;
     var goodsList = this.data.goodsList;
     var goodsJsonStr = "[";

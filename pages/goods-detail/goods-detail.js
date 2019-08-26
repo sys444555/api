@@ -287,7 +287,7 @@ Page({
    * @param {Object} e
    */
   labelItemTap: function(e) {
-    debugger;
+    
     var that = this;
     // 取消该分类下的子栏目所有的选中状态
     var childs = that.data.goodsDetail.properties[e.currentTarget.dataset.propertyindex].childsCurGoods;
@@ -386,7 +386,7 @@ Page({
       data: shopCarInfo
     })
     //更新tabar购物车数字角标
-    debugger;
+    
     app.getShopCartNum()
     this.closePopupTap();
     wx.showToast({
@@ -431,7 +431,7 @@ Page({
       return;
     }
     setTimeout(function() {
-      debugger;
+      
       wx.hideLoading();
       //组建立即购买信息
       var buyNowInfo = that.buliduBuyNowInfo();
