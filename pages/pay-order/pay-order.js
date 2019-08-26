@@ -73,11 +73,36 @@ Page({
 
   createOrder: function(e) {
 
+    
+    var that = this;
+
+    var orderOn = util.orderId();
+
+    var goodsJsonStr = that.data.goodsJsonStr;
+    var addressId = that.data.curAddressData.id;
+
+    var remark = "";
+
+    if (e) {
+      remark = e.detail.value.remark; // 备注信息
+    }
+
+    var postData = {
+      goodsJsonStr: goodsJsonStr,
+      remark: remark,
+      orderOn: orderOn,
+      addressId: addressId
+    }
+
+    console.log(goodsJsonStr)
+
+    debugger;
+
     wx: wx.request({
       url: app.globalData.urls + '/api/wxPay',
       data: {
         body: "款项支付",
-        orderOn: util.orderId(),
+        orderOn: orderOn,
         payNum: "1",
         openId: getApp().globalData.openid,
         refundFee: "0"
@@ -89,7 +114,7 @@ Page({
       method: 'POST',
       dataType: 'json',
       responseType: 'text',
-      success: function (res) {
+      success: function(res) {
         var data = res.data.data;
         // 生成预付款单
         wx.requestPayment({
@@ -98,11 +123,39 @@ Page({
           package: data.package,
           signType: 'MD5',
           paySign: data.paySign,
-          success: function (res) {
-            
+          success: function(res) {
+            wx.request({
+              url: app.globalData.urls + '/api/order/create',
+              method: 'POST',
+              header: {
+                'token': app.globalData.token,
+                'content-type': 'application/x-www-form-urlencoded'
+              },
+              data: postData,
+              success: function(res) {
+
+                if (e && "buyNow" != that.data.orderType) {
+                  // 清空购物车数据
+                  wx.removeStorageSync('shopCarInfo');
+                  wx.removeStorageSync('buykjInfo');
+                }
+
+                // console.log(postData)
+                wx.hideLoading();
+                if (res.data.code != 0) {
+                  wx.showModal({
+                    title: '错误',
+                    content: res.data.msg,
+                    showCancel: false
+                  })
+                  return;
+                } 
+              }
+            })
+
           }
         })
-      }
+      },
     })
 
 
@@ -292,8 +345,7 @@ Page({
         inviter_id = inviter_id_storge;
       }
 
-
-      goodsJsonStrTmp += '{"goodsId":' + carShopBean.goodsId + ',"number":' + carShopBean.number + ',"propertyChildIds":"' + carShopBean.propertyChildIds + '","logisticsType":0, "inviter_id":' + inviter_id + '}';
+      goodsJsonStrTmp += '{"goodsId":' + carShopBean.goodsId + ',"number":' + carShopBean.number + ',"specifications":"' + carShopBean.label.split(" ")[0].split(":")[1] + ":" + carShopBean.label.split(" ")[2].split(":")[1] + '"}';
       goodsJsonStr += goodsJsonStrTmp;
 
 
@@ -305,7 +357,7 @@ Page({
       goodsJsonStr: goodsJsonStr,
       allGoodsPrice: allGoodsPrice
     });
-    that.createOrder();
+    //that.createOrder();
   },
   addAddress: function() {
     wx.navigateTo({
