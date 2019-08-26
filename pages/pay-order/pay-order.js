@@ -135,23 +135,21 @@ Page({
               },
               data: postData,
               success: function(res) {
-
+                debugger;
                 if (e && "buyNow" != that.data.orderType) {
                   // 清空购物车数据
                   wx.removeStorageSync('shopCarInfo');
                   wx.removeStorageSync('buykjInfo');
                 }
 
+                wx.navigateBack({
+                  
+                })
+
                 // console.log(postData)
-                wx.hideLoading();
-                if (res.data.code != 0) {
-                  wx.showModal({
-                    title: '错误',
-                    content: res.data.msg,
-                    showCancel: false
-                  })
-                  return;
-                } 
+                //wx.hideLoading();
+
+
               }
             })
 
