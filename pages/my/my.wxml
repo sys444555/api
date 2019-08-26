@@ -14,17 +14,17 @@
 
   <view class="user-cart-list">
     <navigator hover-class="none" class="cart-list" url="/pages/order-list/order-list?currentType=0">
-      <view wx:if="{{noplay}}" class="red-dot">{{noplay}}</view>
+      <view wx:if="{{noplay == 0 ? '':active}}" class="red-dot">{{noplay}}</view>
       <image src="../../images/order-details/orderform_pay.png"></image>
       待付款
     </navigator>
     <navigator hover-class="none" class="cart-list" url="/pages/order-list/order-list?currentType=1">
-      <view wx:if="{{notransfer}}" class="red-dot">{{notransfer}}</view>
+      <view wx:if="{{notransfer == 0 ? '':active}}" class="red-dot">{{notransfer}}</view>
       <image src="../../images/order-details/orderform_ship.png"></image>
       待发货
     </navigator>
     <navigator hover-class="none" class="cart-list" url="/pages/order-list/order-list?currentType=2">
-      <view wx:if="{{noconfirm}}" class="red-dot">{{noconfirm}}</view>
+      <view wx:if="{{noconfirm == 0 ? '':active}}" class="red-dot">{{noconfirm}}</view>
       <image src="../../images/order-details/delivering.png"></image>
       待收货
     </navigator>

@@ -623,7 +623,7 @@ Page({
   reputation: function(goodsId) {
     var that = this;
     wx.request({
-      url: app.siteInfo.url + app.siteInfo.subDomain + '/shop/goods/reputation',
+      url: app.siteInfo.url + app.siteInfo.subDomain + '/api/shop/goods/reputation',
       data: {
         goodsId: goodsId
       },

@@ -336,7 +336,7 @@ Page({
 		app.getShopCartNum()
   },
   toPayOrder: function () {
-    debugger;
+    
     wx.showLoading();
     var that = this;
     if (this.data.goodsList.noSelect) {
@@ -419,7 +419,7 @@ Page({
           success: function (res) {
             doneNumber++;
             if (res.data.data.basicInfo.stores < carShopBean.number) {
-              debugger;
+              
               wx.showModal({
                 title: '提示',
                 content: carShopBean.name + ' 库存不足，请重新购买',
