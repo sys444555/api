@@ -78,6 +78,7 @@ Page({
     that.onShow();
   },
   onShow: function () {
+    debugger;
     var that = this;
     wx.getStorage({
       key: 'shopCarInfo',
@@ -99,6 +100,11 @@ Page({
             index: 2,
           })
         }
+      },
+      fail :function(){
+        wx.removeTabBarBadge({
+          index: 2,
+        })
       }
     })
     wx.request({
