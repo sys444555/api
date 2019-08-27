@@ -34,7 +34,7 @@
 
   <view class="footer-box">
     <view class="box-title buy-now">
-        <view class="box-now-buy npx" bindtap="">立即充值</view>
+        <view class="box-now-buy npx" bindtap="Recharge">立即充值</view>
       </view>
   </view>
 

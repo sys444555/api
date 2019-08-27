@@ -146,7 +146,6 @@ Page({
               },
               data: postData,
               success: function(res) {
-                debugger;
                 if (e && "buyNow" != that.data.orderType) {
                   // 清空购物车数据
                   wx.removeStorageSync('shopCarInfo');
