@@ -5,7 +5,7 @@ Page({
       saveHidden: true,
       totalPrice: 0,
       allSelect: true,
-      noSelect: false,
+      noSelect: true,
       list: []
     },
     delBtnWidth: 120, //删除按钮宽度单位（rpx）
@@ -259,7 +259,7 @@ Page({
     for (var i = 0; i < list.length; i++) {
       var curItem = list[i];
       if (curItem.active) {
-        allSelect = false;
+        allSelect = true;
       } else {
         allSelect = false;
         break;

@@ -15,7 +15,9 @@ function formatNumber(n) {
 
 //生成订单号
 const orderId = oId => {
-  return Math.floor(Math.random() * 99999999999999999);
+  var orderId = (Math.floor(Math.random() * 999999999999999999))+"";
+  orderId = orderId.length == 18 ? parseInt(orderId) : parseInt(orderId + 100000000000000000)
+  return orderId;
 }
 
 module.exports = {
