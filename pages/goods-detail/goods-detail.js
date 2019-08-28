@@ -206,7 +206,7 @@ Page({
   //   })
   // },
   goShopCar: function() {
-    wx.reLaunch({
+    wx.switchTab({
       url: "/pages/cart/cart"
     });
   },

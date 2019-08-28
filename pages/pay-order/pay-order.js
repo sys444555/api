@@ -12,7 +12,7 @@ Page({
     allGoodsAndYunPrice: 0,
     goodsJsonStr: "",
     orderType: "", //订单类型，购物车下单或立即支付下单，默认是购物车，
-
+    vipCode : 0,
     hasNoCoupons: true,
     coupons: [],
     youhuijine: 0, //优惠券金额
@@ -22,7 +22,7 @@ Page({
     //console.log(this.data.orderType)
     var that = this;
     var shopList = [];
-
+    
     //立即购买下单
     if ("buyNow" == that.data.orderType) {
       var buyNowInfoMem = wx.getStorageSync('buyNowInfo');
@@ -39,16 +39,19 @@ Page({
         });
       }
     }
+    
     that.setData({
       goodsList: shopList,
     });
     that.initShippingAddress();
+    
   },
 
   onLoad: function(e) {
 
-    //console.log(e)
+    console.log(e)
     var that = this;
+
     if (app.globalData.iphone == true) {
       that.setData({
         iphone: 'iphone'
@@ -57,9 +60,12 @@ Page({
     //显示收货地址标识
     that.setData({
       isNeedLogistics: 1,
-      orderType: e.orderType
+      orderType: e.orderType,
+      vipCode : e.vip
     });
   },
+
+ 
 
   getDistrictId: function(obj, aaa) {
     if (!obj) {
@@ -70,6 +76,7 @@ Page({
     }
     return aaa;
   },
+
 
   createOrder: function(e) {
 
@@ -94,6 +101,8 @@ Page({
 
 
     var remark = "";
+
+    
 
     if (e) {
       remark = e.detail.value.remark; // 备注信息
@@ -217,10 +226,14 @@ Page({
       goodsJsonStr += goodsJsonStrTmp;
     }
     goodsJsonStr += "]";
+    debugger;
+    var allGoodsAndYunPrice = that.data.vipCode == 1 ? allGoodsPrice * 0.4 : allGoodsPrice
+    allGoodsAndYunPrice = parseFloat(allGoodsAndYunPrice.toFixed(2))
     //console.log(goodsJsonStr);
     that.setData({
       isNeedLogistics: isNeedLogistics,
       goodsJsonStr: goodsJsonStr,
+      allGoodsAndYunPrice: allGoodsAndYunPrice,
       allGoodsPrice: allGoodsPrice
     });
     //that.createOrder();
