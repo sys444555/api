@@ -1,4 +1,5 @@
 var app = getApp()
+var util = require('../../utils/util.js')
 Page({
 
   /**
@@ -9,7 +10,8 @@ Page({
     tabArr: {
       curHdIndex: 0,
       curBdIndex: 0
-    }
+    },
+    vipCode:0,
   },
 
   /**
@@ -17,25 +19,26 @@ Page({
    */
   onLoad: function() {
     var that = this;
+   
     if (app.globalData.iphone == true) {
       that.setData({
         iphone: 'iphone'
       })
-    }
+    } 
     wx.request({
-      url: app.globalData.urls + '/user/amount',
-      data: {
-        token: app.globalData.token
+      
+      url: app.globalData.urls +'/api/user/find',
+      data:{
+        Openid: getApp().globalData.openid
       },
-      success: function(res) {
-        if (res.data.code == 0) {
-          that.setData({
-            balance: res.data.data.balance,
-            freeze: res.data.data.freeze,
-            score: res.data.data.score
-          });
-        }
-      }
+       success: function (res) {
+      
+         if(res.data.data.vip==1){
+           that.setData({
+            vipCode:1
+           })
+         }
+       }
     })
   },
 
@@ -50,22 +53,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    // var that = this;
-    // wx.request({
-    //   url: app.globalData.urls + '/user/amount',
-    //   data: {
-    //     token: app.globalData.token
-    //   },
-    //   success: function(res) {
-    //     if (res.data.code == 0) {
-    //       that.setData({
-    //         balance: res.data.data.balance,
-    //         freeze: res.data.data.freeze,
-    //         score: res.data.data.score
-    //       });
-    //     }
-    //   }
-    // })
+     var that = this;
+
   },
 
   /**
@@ -114,44 +103,94 @@ Page({
       tabArr: _obj
     });
   },
-  bindSave: function(e) {
+  //立即充值按钮时间
+  Recharge: function(){
     var that = this;
-    var amount = e.detail.value.amount;
-
-    if (amount == "" || amount * 1 < 100) {
-      wx.showModal({
-        title: '错误',
-        content: '请填写正确的提现金额',
-        showCancel: false
+    var WXdata = "";
+    //判断是否已经是超级合伙人
+    if (that.data.vipCode==1){
+      wx.showToast({
+        title: '您已经是超级合伙人了',
+        icon: 'none',
+        duration: 2000//持续的时间
       })
-      return
-    }
-    wx.request({
-      url: app.globalData.urls + '/user/withDraw/apply',
-      data: {
-        token: app.globalData.token,
-        money: amount
+    }else{
+      var orderOn = util.orderId();
+      //调用支付接口
+      wx.request({
+        url: app.globalData.urls + '/api/wxPay',
+        data:{
+          body: "申请超级合伙人",
+          orderOn: orderOn,
+          payNum: "1",
+          openId: getApp().globalData.openid,
+          refundFee: "0"
+        },
+        header: {
+        "token": app.globalData.token,
+        'content-type': 'application/x-www-form-urlencoded'
       },
-      success: function(res) {
-        if (res.data.code == 0) {
-          wx.showModal({
-            title: '成功',
-            content: '您的提现申请已提交，等待财务打款',
-            showCancel: false,
-            success: function(res) {
-              if (res.confirm) {
-                that.bindCancel();
-              }
+        method: 'POST',
+        dataType: 'json',
+        responseType: 'text',
+        success: function (res) {
+          WXdata=res.data.data
+          //数据库记入订单
+          wx.request({
+            url: app.globalData.urls + '/api/order/create/vip',
+            method: 'POST',
+            header: {
+              'token': app.globalData.token,
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            data: {
+              orderOn: orderOn,
+              remark: "超级合伙人业务办理",
+              goodsPrice: 10000,
+              openId: getApp().globalData.openid,
+              actualPrice: 10000,
+              payId: 0
+            },
+            success: function (res) {
+             
+              // 生成预付款单
+              wx.requestPayment({
+                
+                timeStamp: WXdata.timeStamp,
+                nonceStr: WXdata.nonceStr,
+                package: WXdata.package,
+                signType: 'MD5',
+                paySign: WXdata.paySign,
+                success: function (res) {
+                  //更改会员状态
+                  wx.request({
+                    url: app.globalData.urls + '/api/user/vip',
+                    method: 'POST',
+                    header: {
+                      'token': app.globalData.token,
+                      'content-type': 'application/x-www-form-urlencoded'
+                    },
+                    data:{
+                      openId: getApp().globalData.openid
+                    },
+                    success: function (res) {
+                      that.setData({
+                        vipCode: 1
+                      })
+                      wx.showToast({
+                        title: '办理成功,恭喜您成为超级合伙人',
+                        icon: 'none',
+                        duration: 2000//持续的时间
+                      })
+                    }
+                  })
+                }
+              })
             }
           })
-        } else {
-          wx.showModal({
-            title: '错误',
-            content: res.data.msg,
-            showCancel: false
-          })
         }
-      }
-    })
-  }
+      })
+    }
+  },
+ 
 })

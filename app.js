@@ -84,9 +84,8 @@ App({
         });
       }
     });
-  
-
   },
+
   sendTempleMsg: function(orderId, trigger, template_id, form_id, page, postJsonString) {
     var that = this;
     wx.request({
@@ -148,6 +147,7 @@ App({
     return false;
   },
   getShopCartNum: function() {
+    
     var that = this
     wx.getStorage({
       key: 'shopCarInfo',
