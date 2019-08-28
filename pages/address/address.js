@@ -12,7 +12,7 @@ Page({
   selectTap: function(e) {
     var id = e.currentTarget.dataset.id;
     wx.request({
-      url: app.globalData.urls + '/user/shipping-address/updateAddressDefault',
+      url: app.globalData.urls + '/api/user/shipping-address/updateAddressDefault',
       data: {
         id: id,
         isDefault: 1

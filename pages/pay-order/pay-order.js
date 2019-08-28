@@ -141,7 +141,7 @@ Page({
           },
           data: postData,
           success: function(res) {
-
+            
             if (res.data.code == 0) {
               if (e && "buyNow" != that.data.orderType) {
                 // 清空购物车数据
@@ -157,8 +157,7 @@ Page({
                 package: wxData.package,
                 signType: 'MD5',
                 paySign: wxData.paySign,
-                success: function(res) {
-                
+                success: function(res) {               
                   wx.switchTab({
                     url: '/pages/cart/cart',
                   })
