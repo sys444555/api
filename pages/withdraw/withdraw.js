@@ -6,12 +6,13 @@ Page({
    * 页面的初始数据
    */
   data: {
+    boxStatus: true,
     balance: 0,
     tabArr: {
       curHdIndex: 0,
       curBdIndex: 0
     },
-    vipCode:0,
+    vipCode: 0,
   },
 
   /**
@@ -19,26 +20,26 @@ Page({
    */
   onLoad: function() {
     var that = this;
-   
+
     if (app.globalData.iphone == true) {
       that.setData({
         iphone: 'iphone'
       })
-    } 
+    }
     wx.request({
-      
-      url: app.globalData.urls +'/api/user/find',
-      data:{
+
+      url: app.globalData.urls + '/api/user/find',
+      data: {
         Openid: getApp().globalData.openid
       },
-       success: function (res) {
-      
-         if(res.data.data.vip==1){
-           that.setData({
-            vipCode:1
-           })
-         }
-       }
+      success: function(res) {
+
+        if (res.data.data.vip == 1) {
+          that.setData({
+            vipCode: 1
+          })
+        }
+      }
     })
   },
 
@@ -53,7 +54,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-     var that = this;
+    var that = this;
 
   },
 
@@ -94,7 +95,7 @@ Page({
   bindCancel: function() {
     wx.navigateBack({})
   },
-  tabFun: function (e) {
+  tabFun: function(e) {
     var _datasetId = e.target.dataset.id;
     var _obj = {};
     _obj.curHdIndex = _datasetId;
@@ -104,22 +105,25 @@ Page({
     });
   },
   //立即充值按钮时间
-  Recharge: function(){
+  Recharge: function(sName,sPhone) {
     var that = this;
     var WXdata = "";
     //判断是否已经是超级合伙人
-    if (that.data.vipCode==1){
+    if (that.data.vipCode == 1) {
       wx.showToast({
         title: '您已经是超级合伙人了',
         icon: 'none',
-        duration: 2000//持续的时间
+        duration: 2000 //持续的时间
       })
-    }else{
+      that.setData({
+        boxStatus: true,
+      })
+    } else {
       var orderOn = util.orderId();
       //调用支付接口
       wx.request({
         url: app.globalData.urls + '/api/wxPay',
-        data:{
+        data: {
           body: "申请超级合伙人",
           orderOn: orderOn,
           payNum: "1",
@@ -127,14 +131,14 @@ Page({
           refundFee: "0"
         },
         header: {
-        "token": app.globalData.token,
-        'content-type': 'application/x-www-form-urlencoded'
-      },
+          "token": app.globalData.token,
+          'content-type': 'application/x-www-form-urlencoded'
+        },
         method: 'POST',
         dataType: 'json',
         responseType: 'text',
-        success: function (res) {
-          WXdata=res.data.data
+        success: function(res) {
+          WXdata = res.data.data
           //数据库记入订单
           wx.request({
             url: app.globalData.urls + '/api/order/create/vip',
@@ -151,17 +155,17 @@ Page({
               actualPrice: 10000,
               payId: 0
             },
-            success: function (res) {
-             
+            success: function(res) {
+
               // 生成预付款单
               wx.requestPayment({
-                
+
                 timeStamp: WXdata.timeStamp,
                 nonceStr: WXdata.nonceStr,
                 package: WXdata.package,
                 signType: 'MD5',
                 paySign: WXdata.paySign,
-                success: function (res) {
+                success: function(res) {
                   //更改会员状态
                   wx.request({
                     url: app.globalData.urls + '/api/user/vip',
@@ -170,17 +174,20 @@ Page({
                       'token': app.globalData.token,
                       'content-type': 'application/x-www-form-urlencoded'
                     },
-                    data:{
-                      openId: getApp().globalData.openid
+                    data: {
+                      openId: getApp().globalData.openid,
+                      sName : sName,
+                      sPhone, sPhone
                     },
-                    success: function (res) {
+                    success: function(res) {
                       that.setData({
-                        vipCode: 1
+                        vipCode: 1,
+                        boxStatus : true
                       })
                       wx.showToast({
                         title: '办理成功,恭喜您成为超级合伙人',
                         icon: 'none',
-                        duration: 2000//持续的时间
+                        duration: 2000 //持续的时间
                       })
                     }
                   })
@@ -192,5 +199,32 @@ Page({
       })
     }
   },
- 
+
+  goBack: function() {
+    var that = this;
+    that.setData({
+      boxStatus: true
+    })
+  },
+
+  go: function() {
+    var that = this;
+    that.setData({
+      boxStatus: false
+    })
+  },
+
+  form: function(e) {
+    var that = this;
+    if (e.detail.value.sName == "" || e.detail.value.sPhone == "") {
+      wx.showToast({
+        title: '信息为空,请确认',
+        icon: "none",
+        duration: 3000
+      })
+      return;
+    } 
+    that.Recharge(e.detail.value.sName, e.detail.value.sPhone);
+  }
+
 })

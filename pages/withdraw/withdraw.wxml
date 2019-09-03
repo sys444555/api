@@ -14,7 +14,7 @@
   </view>
   <view class="tab-header" bindtap="tabFun">
     <view class="{{tabArr.curHdIndex=='0'? 'active' : ''}}" id="tab-hd01" data-id="0">申请合伙人</view>
-    
+
   </view>
 
   <view class="tab-container">
@@ -34,8 +34,25 @@
 
   <view class="footer-box">
     <view class="box-title buy-now">
-        <view class="box-now-buy npx" bindtap="Recharge">立即充值</view>
-      </view>
+      <view class="box-now-buy npx" bindtap="go">立即加入</view>
+    </view>
   </view>
+
+  <form bindsubmit='form'>
+    <view class="box" hidden="{{boxStatus}}">
+      <view class="drawer_title">天佑服饰超级合伙人</view>
+      <view class="top grid">
+        <label class="title col-0">联系人</label>
+        <input class="input_base input_h30 col-1" name="sName" placeholder="填写您的名字"></input>
+      </view>
+      <view class="top grid">
+        <label class="title col-0">电话</label>
+        <input class="input_base input_h30 col-1" name="sPhone" placeholder="您的联系方式"></input>
+      </view>
+      <button class="btn_ok" formType="submit">点击充值</button>
+      <button class="btn_error" bindtap="goBack">我要考虑</button>
+    </view>
+  </form>
+
 
 </view>
