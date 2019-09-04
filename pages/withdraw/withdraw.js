@@ -111,9 +111,9 @@ Page({
     //判断是否已经是超级合伙人
     if (that.data.vipCode == 1) {
       wx.showToast({
-        title: '您已经是超级合伙人了',
+        title: '您已经是合伙人,办理失败',
         icon: 'none',
-        duration: 2000 //持续的时间
+        duration: 3000 //持续的时间
       })
       that.setData({
         boxStatus: true,

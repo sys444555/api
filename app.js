@@ -147,9 +147,9 @@ App({
     return false;
   },
   getShopCartNum: function() {
-    
     var that = this
     wx.getStorage({
+      
       key: 'shopCarInfo',
       success: function(res) {
         if (res.data) {
@@ -158,6 +158,9 @@ App({
               index: 2,
               text: '' + res.data.shopNum + ''
             })
+            for(var i =0; i < res.data.shopList.length ;i++){
+              res.data.shopList[i].active = false;  
+            }
           } else {
             wx.removeTabBarBadge({
               index: 2,

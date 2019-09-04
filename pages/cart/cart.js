@@ -37,8 +37,10 @@ Page({
       url: "/pages/goods-detail/goods-detail?id=" + e.currentTarget.dataset.id
     })
   },
+
   onLoad: function() {
 
+    //首先加载读取用户是否为超级会员
     var that = this;
 
     if (app.globalData.iphone == true) {
@@ -86,25 +88,8 @@ Page({
   },
 
   onShow: function() {
-
+    debugger;
     var that = this;
-    
-    wx.request({
-      url: app.globalData.urls + '/api/user/find',
-      data: {
-        "Openid": app.globalData.openid
-      },
-
-
-      success: function(res) {
-        if (res.data.code == 0) {
-          that.setData({
-           vipCode: res.data.data.vip
-          })
-        }
-      }
-    })
-
     wx.getStorage({
       key: 'shopCarInfo',
       success: function(res) {
@@ -133,6 +118,22 @@ Page({
         })
       }
     })
+
+    wx.request({
+      url: app.globalData.urls + '/api/user/find',
+      data: {
+        "Openid": app.globalData.openid
+      },
+
+      success: function(res) {
+        if (res.data.code == 0) {
+          that.setData({
+            vipCode: res.data.data.vip
+          })
+        }
+      }
+    })
+
     wx.request({
       url: app.globalData.urls + '/api/order/statistics',
       data: {
@@ -155,7 +156,7 @@ Page({
     })
     var shopList = [];
     // 获取购物车数据
-    
+
     var shopCarInfoMem = wx.getStorageSync('shopCarInfo');
     if (shopCarInfoMem && shopCarInfoMem.shopList) {
       shopList = shopCarInfoMem.shopList
@@ -243,13 +244,13 @@ Page({
       }
     }
 
-    if (this.data.vipCode == 0) {
-      total = parseFloat(total.toFixed(2)); //js浮点计算bug，取两位小数精度
-    } else if (this.data.vipCode == 1) {
-      total = parseFloat(total.toFixed(2));
-      total = total * 0.4;
-      total = parseFloat(total.toFixed(2));
-    }
+    // if (this.data.vipCode == 0) {
+    //   total = parseFloat(total.toFixed(2)); //js浮点计算bug，取两位小数精度
+    // } else if (this.data.vipCode == 1) {
+    //   total = parseFloat(total.toFixed(2));
+    //   total = total * 0.4;
+    //   total = parseFloat(total.toFixed(2));
+    // }
 
     return total;
   },
@@ -382,7 +383,6 @@ Page({
     app.getShopCartNum()
   },
   toPayOrder: function() {
-
     wx.showLoading();
     var that = this;
     if (this.data.goodsList.noSelect) {
@@ -391,13 +391,29 @@ Page({
     }
     // 重新计算价格，判断库存
     var shopList = [];
+
+    var shopNoSelect = [];
+
     var shopCarInfoMem = wx.getStorageSync('shopCarInfo');
+
+   
+
     if (shopCarInfoMem && shopCarInfoMem.shopList) {
       // shopList = shopCarInfoMem.shopList
       shopList = shopCarInfoMem.shopList.filter(entity => {
         return entity.active;
       });
+
+      shopNoSelect = shopCarInfoMem.shopList.filter(entity => {
+        return entity.active == false;
+      });
     }
+
+    wx.setStorage({
+      key: 'shopNoSelect',
+      data: shopNoSelect,
+    })
+
     if (shopList.length == 0) {
       wx.hideLoading();
       return;
@@ -497,7 +513,7 @@ Page({
   navigateToPayOrder: function() {
     wx.hideLoading();
     wx.navigateTo({
-      url: "/pages/pay-order/pay-order?orderType=cart&vip="+this.data.vipCode
+      url: "/pages/pay-order/pay-order?orderType=cart&vip=" + this.data.vipCode
     })
   }
 })

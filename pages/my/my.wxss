@@ -20,7 +20,7 @@ page {
   width: 100%;
   height: 400rpx;
   text-align: center;
-  background-image: url(https://cdn.it120.cc/apifactory/2018/03/07/fb8857533553034ee28c92bd0dd89b15.jpg);
+  background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1567520090447&di=4f6ab18af2ac538c2720147a309cf19f&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F038061d5812db28a84a0e282b5d9f28.jpg);
   background-size: 100% 115%;
   position: relative;
   margin-bottom: 30rpx;
@@ -74,7 +74,7 @@ page {
 
 .userinfo-item {
   width: 100%;
-  background: url(https://cdn.it120.cc/apifactory/2018/03/02/bccdaf7292464a539efa6a1ea9a11ee6.png) no-repeat 750rpx center;
+  background: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1567520090447&di=4f6ab18af2ac538c2720147a309cf19f&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F038061d5812db28a84a0e282b5d9f28.jpg) no-repeat 750rpx center;
   background-size: 16rpx auto;
   border-bottom: 1px solid #fbfbfb;
   line-height: 100rpx;

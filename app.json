@@ -17,8 +17,6 @@
     "pages/order-list/order-list",
     "pages/cate-list/cate-list",
     "pages/order-detail/order-detail",
-    "pages/logistics/logistics",
-    "pages/success/success",
     "pages/pay-order/pay-order"
   ],
   "window": {

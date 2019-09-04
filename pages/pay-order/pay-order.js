@@ -12,7 +12,7 @@ Page({
     allGoodsAndYunPrice: 0,
     goodsJsonStr: "",
     orderType: "", //订单类型，购物车下单或立即支付下单，默认是购物车，
-    vipCode : 0,
+    vipCode: 0,
     hasNoCoupons: true,
     coupons: [],
     youhuijine: 0, //优惠券金额
@@ -22,7 +22,7 @@ Page({
     //console.log(this.data.orderType)
     var that = this;
     var shopList = [];
-    
+
     //立即购买下单
     if ("buyNow" == that.data.orderType) {
       var buyNowInfoMem = wx.getStorageSync('buyNowInfo');
@@ -39,16 +39,15 @@ Page({
         });
       }
     }
-    
+
     that.setData({
       goodsList: shopList,
     });
     that.initShippingAddress();
-    
+
   },
 
   onLoad: function(e) {
-
     console.log(e)
     var that = this;
 
@@ -61,11 +60,11 @@ Page({
     that.setData({
       isNeedLogistics: 1,
       orderType: e.orderType,
-      vipCode : e.vip
+      vipCode: e.vip
     });
   },
 
- 
+
 
   getDistrictId: function(obj, aaa) {
     if (!obj) {
@@ -102,7 +101,7 @@ Page({
 
     var remark = "";
 
-    
+
 
     if (e) {
       remark = e.detail.value.remark; // 备注信息
@@ -116,10 +115,6 @@ Page({
       payId: 0,
       actualPrice: this.data.allGoodsPrice
     }
-
-    console.log(goodsJsonStr)
-
-
 
     wx: wx.request({
       url: app.globalData.urls + '/api/wxPay',
@@ -150,15 +145,11 @@ Page({
           },
           data: postData,
           success: function(res) {
-            
+
             if (res.data.code == 0) {
-              if (e && "buyNow" != that.data.orderType) {
-                // 清空购物车数据
-                wx.removeStorageSync('shopCarInfo');
-                wx.removeStorageSync('buykjInfo');
-              }
+
               wx.hideLoading();
-              
+
               // 生成预付款单
               wx.requestPayment({
                 timeStamp: wxData.timeStamp,
@@ -166,9 +157,33 @@ Page({
                 package: wxData.package,
                 signType: 'MD5',
                 paySign: wxData.paySign,
-                success: function(res) {               
-                  wx.switchTab({
-                    url: '/pages/cart/cart',
+                success: function(res) {
+                  if (e && "buyNow" != that.data.orderType) {
+                    // 清空购物车数据
+                    wx.removeStorageSync('shopCarInfo');
+                  }
+
+                  wx.getStorage({
+                    key: 'shopNoSelect',
+                    success: function(res) {
+                      var shopCarInfo = {};
+                      var tempNumber = 0;
+                      shopCarInfo.shopList = res.data;
+                      for (var i = 0; i < res.data.length; i++) {
+                        tempNumber = tempNumber + res.data[i].number
+                      }
+                      shopCarInfo.shopNum = tempNumber;
+
+                      wx.setStorage({
+                        key: 'shopCarInfo',
+                        data: shopCarInfo,
+                        success: function() {
+                          wx.switchTab({
+                            url: '/pages/cart/cart',
+                          })
+                        }
+                      })
+                    },
                   })
                 }
               })
@@ -225,8 +240,7 @@ Page({
       goodsJsonStr += goodsJsonStrTmp;
     }
     goodsJsonStr += "]";
-    debugger;
-    var allGoodsAndYunPrice = that.data.vipCode == 1 ? allGoodsPrice * 0.4 : allGoodsPrice
+    var allGoodsAndYunPrice = that.data.vipCode == 1 ? allGoodsPrice * 0.6 : allGoodsPrice
     allGoodsAndYunPrice = parseFloat(allGoodsAndYunPrice.toFixed(2))
     //console.log(goodsJsonStr);
     that.setData({
