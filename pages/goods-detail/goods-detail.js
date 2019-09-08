@@ -549,7 +549,6 @@ Page({
    * 组建立即购买信息
    */
   buliduBuyNowInfo: function() {
-    debugger;
     var shopCarMap = {};
     shopCarMap.goodsId = this.data.goodsDetail.basicInfo.id;
     shopCarMap.pic = this.data.goodsDetail.basicInfo.pic;

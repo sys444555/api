@@ -232,7 +232,6 @@ Page({
     }
   },
   setDBSaveAddressId: function(data) {
-    debugger;
     var retSelIdx = 0;
     for (var i = 0; i < commonCityData.cityData.length; i++) {
       if (data.provinceId == commonCityData.cityData[i].id) {

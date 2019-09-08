@@ -16,7 +16,7 @@ Page({
   },
   onLoad: function() {
     var that = this;
-    that.getUserApiInfo();
+    //that.getUserApiInfo();
     that.getUserAmount();
     that.getInfo();
     wx.request({
@@ -34,7 +34,7 @@ Page({
     });
   },
   onShow() {
-    this.getUserApiInfo();
+    //this.getUserApiInfo();
     this.getUserAmount();
     this.getInfo();
     this.getUserInfo();
@@ -89,22 +89,22 @@ Page({
       }
     })
   },
-  getUserApiInfo: function() {
-    var that = this;
-    wx.request({
-      url: app.globalData.urls + '/user/detail',
-      data: {
-        openId: app.globalData.openid
-      },
-      success: function(res) {
-        if (res.data.code == 0) {
-          that.setData({
-            apiUserInfoMap: res.data.data
-          });
-        }
-      }
-    })
-  },
+  // getUserApiInfo: function() {
+  //   var that = this;
+  //   wx.request({
+  //     url: app.globalData.urls + '/user/detail',
+  //     data: {
+  //       openId: app.globalData.openid
+  //     },
+  //     success: function(res) {
+  //       if (res.data.code == 0) {
+  //         that.setData({
+  //           apiUserInfoMap: res.data.data
+  //         });
+  //       }
+  //     }
+  //   })
+  // },
   getUserAmount: function() {
     var that = this;
     wx.request({

@@ -72,12 +72,12 @@ page {
   width: 870rpx;
   box-sizing: border-box;
   transition: margin-left 0.2s ease-in-out;
-  background: url(http://chuantu.xyz/t6/702/1567570124x2890173827.png) no-repeat 30rpx center;
+  background: url(http://m.qpic.cn/psb?/V10jxoW80Ntr1Y/xVwLm9n*CzWQ42w6oMS9iNwe0kjpDRjctOLE9vAZ*XY!/b/dL8AAAAAAAAA&bo=JAAkAAAAAAADByI!&rf=viewer_4) no-repeat 30rpx center;
   background-size: 34rpx auto;
 }
 
 .a-goods-conts.active {
-  background: url(http://chuantu.xyz/t6/702/1567569926x992245975.png) no-repeat 30rpx center;
+  background: url(http://m.qpic.cn/psb?/V10jxoW80Ntr1Y/28fIMrQR8S*PjL03.o0qGXfzYDpVtxIodcDPwwQMQPQ!/b/dL4AAAAAAAAA&bo=JAAkAAAAAAADByI!&rf=viewer_4) no-repeat 30rpx center;
   background-size: 34rpx auto;
 }
 
@@ -236,12 +236,12 @@ page {
 .jiesuan-box .all-selected {
   padding-left: 90rpx;
   color: #000;
-  background: url(http://chuantu.xyz/t6/702/1567570124x2890173827.png) no-repeat 30rpx center;
+  background: url(http://m.qpic.cn/psb?/V10jxoW80Ntr1Y/xVwLm9n*CzWQ42w6oMS9iNwe0kjpDRjctOLE9vAZ*XY!/b/dL8AAAAAAAAA&bo=JAAkAAAAAAADByI!&rf=viewer_4) no-repeat 30rpx center;
   background-size: 34rpx auto;
 }
 
 .jiesuan-box .all-selected.active {
-  background: url(http://chuantu.xyz/t6/702/1567569926x992245975.png) no-repeat 30rpx center;
+  background: url(http://m.qpic.cn/psb?/V10jxoW80Ntr1Y/28fIMrQR8S*PjL03.o0qGXfzYDpVtxIodcDPwwQMQPQ!/b/dL4AAAAAAAAA&bo=JAAkAAAAAAADByI!&rf=viewer_4) no-repeat 30rpx center;
   background-size: 34rpx auto;
 }
 

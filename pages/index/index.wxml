@@ -23,13 +23,13 @@
 			  <view class="text">{{item.title}}</view>
 			</view>
 		</view>
-		<view class="index-hot flex">
+		<!-- <view class="index-hot flex">
 			<block wx:for="{{hot}}" wx:key="hot">
 				<navigator hover-class="none" class="hot-item" url="{{item.linkUrl}}?bannerId={{item.id}}">
 					<image src="{{item.picUrl}}"></image>
 				</navigator>
 			</block>
-		</view>
+		</view> -->
 	</view>
 	<view wx:if="{{goods}}" class="goods-container">
 	  <view class="goods-title" bindtap="tapSales" data-id="{{topgoods.remark}}">

@@ -88,7 +88,6 @@ Page({
   },
 
   onShow: function() {
-    debugger;
     var that = this;
     wx.getStorage({
       key: 'shopCarInfo',
