@@ -99,6 +99,9 @@ Page({
         openId: app.globalData.openid,
         id: apiAddid,
         provinceStr: commonCityData.cityData[this.data.selProvinceIndex].name,
+        provinceId: this.data.selProvinceIndex,
+        cityId: this.data.selProvinceIndex,
+        districtId: this.data.selDistrictIndex,
         cityStr: cityStr,
         areaStr: areaStr,
         linkMan: linkMan,
@@ -210,16 +213,19 @@ Page({
               addressData: res.data.data[0],
               selProvince: res.data.data[0].provinceStr,
               selCity: res.data.data[0].cityStr,
-              selDistrict: res.data.data[0].areaStr
+              selDistrict: res.data.data[0].areaStr,
+              selProvinceIndex : res.data.data[0].provinceId,
+              selCityIndex: res.data.data[0].cityId,
+              selDistrictIndex: res.data.data[0].districtId
             });
-            
-            if (that.data.selDistrict == null){
+
+            if (that.data.selDistrict == null) {
               that.setData({
-                selDistrict : ''
+                selDistrict: ''
               })
             }
             return;
-           //that.setDBSaveAddressId(res.data.data);
+            //that.setDBSaveAddressId(res.data.data);
           } else {
             wx.showModal({
               title: '提示',
